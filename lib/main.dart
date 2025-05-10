@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_task_catalift/education_detail_screen.dart';
@@ -33,20 +34,15 @@ class MyApp extends StatelessWidget {
       future: Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
       builder: (context, snapshot) {
         switch(snapshot.connectionState){
-          case ConnectionState.none:
-            return Center(
-              child: Text('Status is None', style: textstyle,),
-            );
-          case ConnectionState.waiting:
-            return Center(
-              child: Text('Status is Waiting', style: textstyle,),
-            );
-          case ConnectionState.active:
-            return Center(
-              child: Text('Status is Active', style: textstyle,),
-            );
           case ConnectionState.done:
-            return LoginScreen();
+            final user = FirebaseAuth.instance.currentUser;
+            if(user != null){
+              return EducationDetailScreen();
+            }else{
+              return LoginScreen();
+            }
+          default:
+            return const Center(child: CircularProgressIndicator());
         }
       },
         ),

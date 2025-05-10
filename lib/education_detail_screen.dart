@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_task_catalift/main.dart';
+import 'dart:io';
 
 import 'intrest_screen.dart';
 
@@ -202,7 +202,11 @@ class _EducationDetailScreenState extends State<EducationDetailScreen> {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        if(Navigator.canPop(context)){
+                          Navigator.of(context).pop();
+                        }else{
+                          exit(0);
+                        }
                       },
                       style: OutlinedButton.styleFrom(
                         side:  BorderSide(color: Theme.of(context).primaryColor),
