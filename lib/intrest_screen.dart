@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'mian_Screen.dart';
+
 class InterestsScreen extends StatefulWidget {
   const InterestsScreen({super.key});
 
@@ -92,7 +94,10 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () {
-                        // TODO: do any thing after selecting interest
+                        // Navigate to main Screen
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => MainScreen()),
+                        );
                       },
                       style: TextButton.styleFrom(
                         backgroundColor:  Theme.of(context).primaryColor,
