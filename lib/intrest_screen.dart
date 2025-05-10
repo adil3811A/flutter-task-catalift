@@ -9,11 +9,11 @@ class InterestsScreen extends StatefulWidget {
 
 class _InterestsScreenState extends State<InterestsScreen> {
   final List<String> interests = [
-    'Lorem ipsum', 'sit amet', 'Lorem', 'ipsum',
-    'dolor', 'Lorem', 'ipsum', 'Lorem ipsum',
-    'Lorem', 'sit amet', 'Lorem', 'ipsum',
-    'dolor', 'Lorem ipsum', 'ipsum', 'Lorem',
-    'Lorem ipsum', 'Lorem', 'ipsum', 'Lorem'
+    'Item 1', 'Item 2', 'Item 3', 'Item 4',
+    'Item 5', 'Item 5', 'Item 6', 'Item 7',
+    'Item 8', 'Item 9', 'Item 10', 'Item 11',
+    'Item 12', 'Item 13', 'Item 14', 'Item 15',
+    'Item 16', 'Item 17', 'Item 18', 'Item 19'
   ];
   Set<String> selectedInterests = {};
   @override
@@ -22,19 +22,16 @@ class _InterestsScreenState extends State<InterestsScreen> {
       backgroundColor: Theme.of(context).canvasColor,
       body: Padding(
         padding: const EdgeInsets.only(
-          left: 22,
-          right: 22,
-          top: 22,
-          bottom: 18,
+            left: 12, right: 12 , top: 50,bottom: 18
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LinearProgressIndicator(value: 0.7),
-            Container(
-              margin: EdgeInsets.only(top: 30, bottom: 20),
-              child: Text('Your Interests', style: TextStyle(fontSize: 30)),
+            Padding(
+              padding: const EdgeInsets.only(left: 20,  right: 20, bottom: 30),
+              child: LinearProgressIndicator(value: 0.7,),
             ),
+            Text('Your Interests', style: TextStyle(fontSize: 30)),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               child: Text(

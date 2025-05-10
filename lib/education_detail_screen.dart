@@ -32,12 +32,12 @@ class _EducationDetailScreenState extends State<EducationDetailScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body:Padding(
-        padding: const EdgeInsets.only(left: 22, right: 22 , top: 12,bottom: 18),
+        padding: const EdgeInsets.only(left: 12, right: 12 , top: 50,bottom: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 60,  right: 60),
+              padding: const EdgeInsets.only(left: 20,  right: 20, bottom: 30),
               child: LinearProgressIndicator(value: 0.4,),
             ),
             Center(
@@ -201,7 +201,9 @@ class _EducationDetailScreenState extends State<EducationDetailScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       style: OutlinedButton.styleFrom(
                         side:  BorderSide(color: Theme.of(context).primaryColor),
                         foregroundColor: Theme.of(context).primaryColor,

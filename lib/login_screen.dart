@@ -19,32 +19,40 @@ class _LoginScreenState extends State<LoginScreen> {
     FirebaseAuth.instance.authStateChanges()
     .listen((user) {
       if(user!=null){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EducationDetailScreen(),));
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => EducationDetailScreen()),(route) => false,);
       }
     },);
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 100 , right: 20 , left: 20, bottom: 20),
+        margin: EdgeInsets.only(top: 50 , right: 20 , left: 20, bottom: 20),
         child: Column(
           children: [
             LinearProgressIndicator(value: 0.2,),
             Expanded(
               child: Center(
-                child:OutlinedButton(
-                    onPressed: () async{
-                      final credential =await signInWithGoogle();
-                      print("this is Cededential $credential");
-                    },
-                    child:Container(
-                      width: 500,
-                      height: 150,
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/google_logo.png'),
-                          Text('Login With Google', style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                    )
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OutlinedButton(
+                        onPressed: () async{
+                          final credential =await signInWithGoogle();
+                          print("this is Cededential $credential");
+                        },
+                        child:Container(
+                          width: 300,
+                          height: 100,
+                          child: Row(
+                            children: [
+                              Image.asset('assets/images/google_logo.png'),
+                              Text('Login With Google', style: TextStyle(fontSize: 12),)
+                            ],
+                          ),
+                        )
+                    ),
+                    TextButton(onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => EducationDetailScreen()));
+                    }, child: Text('Login Letter'))
+                  ],
                 ),
               ),
             )
@@ -55,16 +63,25 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  // Ensure the user is signed out first to trigger account selection
+  await googleSignIn.signOut();
 
-  // Create a new credential
+  // Start the sign-in flow
+  final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+  // If sign-in was aborted
+  if (googleUser == null) {
+    throw Exception('Google sign-in aborted');
+  }
+
+  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
   final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
+    accessToken: googleAuth.accessToken,
+    idToken: googleAuth.idToken,
   );
+
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }
