@@ -6,6 +6,9 @@ Welcome to the official task repository for candidates applying to join the Cata
 
 Your task is to **replicate a mobile app screen** based on the design files we’ve shared with you via email. This will help us assess your development skills, code structure, and UI implementation capabilities.
 
+## Solution Example (click no this image)
+[![](https://img.youtube.com/vi/QwYLEV71WTE/0.jpg)](https://youtu.be/QwYLEV71WTE)
+
 ---
 
 ## 📬 Design Assets
